@@ -14,7 +14,17 @@ module.exports = function (api) {
      
     ],
     plugins: [
-      ["inline-react-svg"]
+      ["inline-react-svg"],
+      [
+        'module-resolver',
+        {
+          root: ['./'],
+          alias: {
+            '@': './', // Adjust this path to match your project's structure
+          },
+          extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+        },
+      ],
     ],
   };
 };

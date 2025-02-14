@@ -1,23 +1,6 @@
-
-
-
-// import { Slot, useRouter } from "expo-router";
-// import {Text} from "react-native";
-// import { useEffect } from "react";
-
-// export default function WebLayout() {
-//   const router = useRouter();
-
-
-//   return (
-//     <Text>Native</Text>
-//   );
-// }
-
 import styled from "@emotion/styled";
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useRouter } from "expo-router";
 
 const Container = styled.div`
@@ -147,7 +130,6 @@ const Login = () => {
 
   const [user, setUser] = useState("");
   const router = useRouter();
-  //   const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const handleLogin = async (e: any) => {
     router.push("/AppHolder");

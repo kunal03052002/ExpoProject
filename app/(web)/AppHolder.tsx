@@ -19,13 +19,13 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-// import { useNavigate } from "react-router-dom";
 import AppsIcon from "@mui/icons-material/Apps";
 import SettingIcon from "@mui/icons-material/SettingsApplications";
 import NotificationsIcon from "@mui/icons-material/CircleNotifications";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { LayoutsList } from "../../data";
+import { useRouter } from "expo-router";
 
 const AppHolder: FC = () => {
   
@@ -35,9 +35,10 @@ const AppHolder: FC = () => {
   const [newAppName, setNewAppName] = useState("");
   const [newAppIcon, setNewAppIcon] = useState(null);
   const [iconPreview, setIconPreview] = useState(null);
-  // const navigate = useNavigate();
+
   // const userData = JSON.parse(sessionStorage.getItem("user")).data;
   // console.log(userData);
+  const router = useRouter();
   useEffect(() => {
     axios.get(`${"http://52.183.132.161/backend"}/api/apps`).then((listResponse) => {
       setList(listResponse.data);
@@ -57,6 +58,7 @@ const AppHolder: FC = () => {
     console.log("editedList >>", editedList)
     // localStorage.setItem("pageConfig", JSON.stringify(editedList.config));
     // navigate(`/builder/${editedList.app_name}`);
+    router.push(`/builder/${editedList.app_name}`);
   };
 const deleteHandler = (itemId :any) => {
   // axios.delete(`"http://52.183.132.161/backend"/api/apps/${itemId}`).then(() => {
@@ -89,6 +91,7 @@ const deleteHandler = (itemId :any) => {
       );
       // localStorage.setItem("pageConfig", JSON.stringify(postData.data.config));
       // navigate(`/builder/${postData.data.app_name}`);
+      router.push(`/builder/${postData.data.app_name}`);
     } catch (er) {
       console.log(er);
     }

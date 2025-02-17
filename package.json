@@ -20,8 +20,12 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@expo/vector-icons": "^14.0.2",
+    "@mui/icons-material": "^5.15.14",
+    "@mui/material": "^5.14.3",
+    "@mui/x-date-pickers": "^7.5.0",
     "@react-navigation/bottom-tabs": "^7.2.0",
     "@react-navigation/native": "^7.0.14",
+    "@reduxjs/toolkit": "^1.8.1",
     "axios": "^1.7.9",
     "babel-plugin-react-svg": "^3.0.3",
     "expo": "~52.0.32",
@@ -45,12 +49,8 @@
     "react-native-screens": "~4.4.0",
     "react-native-web": "~0.19.13",
     "react-native-webview": "13.12.5",
-    "react-router-dom": "^7.1.5",
-    "regenerator-runtime": "^0.14.1",
-
-    "@mui/icons-material": "^5.15.14",
-    "@mui/material": "^5.14.3",
-    "@mui/x-date-pickers": "^7.5.0"
+    "react-redux": "^8.0.1",
+    "regenerator-runtime": "^0.14.1"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

@@ -58,7 +58,7 @@ const AppHolder: FC = () => {
     console.log("editedList >>", editedList)
     // localStorage.setItem("pageConfig", JSON.stringify(editedList.config));
     // navigate(`/builder/${editedList.app_name}`);
-    router.push(`/builder/${editedList.app_name}`);
+    router.push("/App");
   };
 const deleteHandler = (itemId :any) => {
   // axios.delete(`"http://52.183.132.161/backend"/api/apps/${itemId}`).then(() => {

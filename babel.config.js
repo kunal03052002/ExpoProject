@@ -20,7 +20,8 @@ module.exports = function (api) {
         {
           root: ['./'],
           alias: {
-            '@': './', // Adjust this path to match your project's structure
+            '@': './',
+            "@assets": "./assets"
           },
           extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
         },

@@ -132,7 +132,6 @@ const Login = () => {
   const router = useRouter();
   const [password, setPassword] = useState("");
   const handleLogin = async (e: any) => {
-    router.push("/AppHolder");
     e.preventDefault();
     try {
       const userObj = await axios.post(`${"http://52.183.132.161/backend"}/api/users/find`, {

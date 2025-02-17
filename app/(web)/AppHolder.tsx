@@ -456,15 +456,3 @@ const deleteHandler = (itemId :any) => {
 };
 
 export default AppHolder;
-
-
-// import React from 'react';
-
-// const AppHolder = () => {
-//     return(
-//         <div><h1>AppHolder</h1></div>
-//     )
-// }
-
-
-// export default AppHolder;

@@ -45,9 +45,7 @@
     "react-native-screens": "~4.4.0",
     "react-native-web": "~0.19.13",
     "react-native-webview": "13.12.5",
-    "react-router-dom": "^7.1.5",
     "regenerator-runtime": "^0.14.1",
-
     "@mui/icons-material": "^5.15.14",
     "@mui/material": "^5.14.3",
     "@mui/x-date-pickers": "^7.5.0"

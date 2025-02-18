@@ -5,7 +5,10 @@
     "paths": {
       "@/*": [
         "./*"
-      ]
+      ],
+      
+    "@assets/*":["./assets/*"], // Ensure correct alias
+      
     }
   },
   "include": [

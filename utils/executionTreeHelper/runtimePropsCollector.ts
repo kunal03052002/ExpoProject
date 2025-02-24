@@ -126,104 +126,103 @@ class ILLAEditorRuntimePropsCollector {
     )
 
     const utils = this._runtimeProps.utils as Record<string, unknown>
-    // const mergeResult = {
-    //   ...formatedExecutionResult,
-    //   ...THIRD_PARTY_PACKAGES,
-    //   utils,
-    //   ...otherContext,
-    // }
+    const mergeResult = {
+      ...formatedExecutionResult,
+      ...THIRD_PARTY_PACKAGES,
+      utils,
+      ...otherContext,
+    }
 
-    // return mergeResult
-    return null;
+    return mergeResult
   }
 
-  // public getCurrentPageCalcContext(otherContext: Record<string, unknown> = {}) {
-  //   const rootState = store.getState()
-  //   const executionResult = getExecutionResultToCurrentPageCodeMirror(
-  //     rootState,
-  //   ) as Record<string, any>
-  //   const cloneDeepExecutionResult = klona(executionResult)
-  //   const formatedExecutionResult = Object.keys(
-  //     cloneDeepExecutionResult,
-  //   ).reduce(
-  //     (acc, prevKey) => {
-  //       const prev = cloneDeepExecutionResult[prevKey]
+  public getCurrentPageCalcContext(otherContext: Record<string, unknown> = {}) {
+    const rootState = store.getState()
+    const executionResult = getExecutionResultToCurrentPageCodeMirror(
+      rootState,
+    ) as Record<string, any>
+    const cloneDeepExecutionResult = klona(executionResult)
+    const formatedExecutionResult = Object.keys(
+      cloneDeepExecutionResult,
+    ).reduce(
+      (acc, prevKey) => {
+        const prev = cloneDeepExecutionResult[prevKey]
 
-  //       if (!prev) {
-  //         return acc
-  //       }
+        if (!prev) {
+          return acc
+        }
 
-  //       if (
-  //         (Object.hasOwn && Object.hasOwn(prev, "actionType")) ||
-  //         Object.prototype.hasOwnProperty.call(prev, "actionType")
-  //       ) {
-  //         return {
-  //           ...acc,
-  //           [prev.displayName]: {
-  //             ...prev,
-  //             trigger: async () => {
-  //               return await runActionWithExecutionResult(prev, false)
-  //             },
-  //           },
-  //         }
-  //       }
+        if (
+          (Object.hasOwn && Object.hasOwn(prev, "actionType")) ||
+          Object.prototype.hasOwnProperty.call(prev, "actionType")
+        ) {
+          return {
+            ...acc,
+            [prev.displayName]: {
+              ...prev,
+              trigger: async () => {
+                return await runActionWithExecutionResult(prev, false)
+              },
+            },
+          }
+        }
 
-  //       if (prev.$type === "WIDGET") {
-  //         switch (prev.$widgetType) {
-  //           case "MODAL_WIDGET":
-  //             return {
-  //               ...acc,
-  //               [prevKey]: {
-  //                 ...prev,
-  //                 openModal: () => {
-  //                   store.dispatch(
-  //                     executionActions.updateModalDisplayReducer({
-  //                       display: true,
-  //                       displayName: prevKey,
-  //                     }),
-  //                   )
-  //                 },
-  //                 closeModal: () => {
-  //                   store.dispatch(
-  //                     executionActions.updateModalDisplayReducer({
-  //                       display: false,
-  //                       displayName: prevKey,
-  //                     }),
-  //                   )
-  //                 },
-  //               },
-  //             }
-  //           default: {
-  //             const runtimePros: any = this._runtimeProps[prev.displayName]
-  //             if (runtimePros) {
-  //               return {
-  //                 ...acc,
-  //                 [prev.displayName]: {
-  //                   ...prev,
-  //                   ...runtimePros,
-  //                 },
-  //               }
-  //             }
-  //           }
-  //         }
-  //       }
-  //       return {
-  //         ...acc,
-  //         [prevKey]: prev,
-  //       }
-  //     },
-  //     {} as Record<string, any>,
-  //   )
-  //   const utils = this._runtimeProps.utils as Record<string, unknown>
-  //   const mergeResult = {
-  //     ...formatedExecutionResult,
-  //     ...THIRD_PARTY_PACKAGES,
-  //     utils,
-  //     ...otherContext,
-  //   }
+        if (prev.$type === "WIDGET") {
+          switch (prev.$widgetType) {
+            case "MODAL_WIDGET":
+              return {
+                ...acc,
+                [prevKey]: {
+                  ...prev,
+                  openModal: () => {
+                    store.dispatch(
+                      executionActions.updateModalDisplayReducer({
+                        display: true,
+                        displayName: prevKey,
+                      }),
+                    )
+                  },
+                  closeModal: () => {
+                    store.dispatch(
+                      executionActions.updateModalDisplayReducer({
+                        display: false,
+                        displayName: prevKey,
+                      }),
+                    )
+                  },
+                },
+              }
+            default: {
+              const runtimePros: any = this._runtimeProps[prev.displayName]
+              if (runtimePros) {
+                return {
+                  ...acc,
+                  [prev.displayName]: {
+                    ...prev,
+                    ...runtimePros,
+                  },
+                }
+              }
+            }
+          }
+        }
+        return {
+          ...acc,
+          [prevKey]: prev,
+        }
+      },
+      {} as Record<string, any>,
+    )
+    const utils = this._runtimeProps.utils as Record<string, unknown>
+    const mergeResult = {
+      ...formatedExecutionResult,
+      ...THIRD_PARTY_PACKAGES,
+      utils,
+      ...otherContext,
+    }
 
-  //   return mergeResult
-  // }
+    return mergeResult
+  }
 
   public getGlobalCalcContextWithLimit(otherContext?: Record<string, unknown>) {
     const rootState = store.getState()

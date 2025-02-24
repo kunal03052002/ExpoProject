@@ -246,9 +246,8 @@ export const WidgetConfig: WidgetConfigs = {
   // },
 };
 
-// export type WidgetType = keyof typeof WidgetConfig;
-// export const WidgetTypeList = Object.keys(WidgetConfig);
-export const widgetBuilder = (type: any) => {
+export type WidgetType = keyof typeof WidgetConfig;
+export const WidgetTypeList = Object.keys(WidgetConfig);
+export const widgetBuilder = (type: WidgetType) => {
   return WidgetConfig[type];
-  // return undefined
 };

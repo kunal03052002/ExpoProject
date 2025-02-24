@@ -51,7 +51,6 @@ export const ScaleSquare: FC<ScaleSquareProps> = (props) => {
         parentNodeDisplayName={parentNodeDisplayName}
         widgetHeight={height}
       >
-        <></>
         <TransformWidgetWrapper
           displayName={displayName}
           widgetType={widgetType}
@@ -60,12 +59,12 @@ export const ScaleSquare: FC<ScaleSquareProps> = (props) => {
           unitW={unitW}
         />
       </WrapperContainer>
-      {/* {isEditMode && selectedComponents?.length === 1 && isSelected && (
+      {isEditMode && selectedComponents?.length === 1 && isSelected && (
         <AutoHeightWithLimitedContainer
           containerHeight={width}
           displayName={displayName}
         />
-      )} */}
+      )}
     </ResizingAndDragContainer>
   );
 };

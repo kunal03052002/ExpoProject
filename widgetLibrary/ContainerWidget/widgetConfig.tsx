@@ -9,7 +9,7 @@ const defaultListView = [
   { id: v4(), key: "View 3", label: "View 3" },
 ]
 
-export const CONTAINER_WIDGET_CONFIG: any = {
+export const CONTAINER_WIDGET_CONFIG: WidgetConfig = {
   type: "CONTAINER_WIDGET",
   displayName: "container",
   widgetName: "Container",

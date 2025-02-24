@@ -1,13 +1,29 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { get, isNumber } from "lodash-es"
 import { executionActions } from "@/redux/currentApp/executionTree/executionSlice"
-import store from "@/store"
+import store, { RootState } from "@/store"
 import { evaluateDynamicString } from "@/utils/evaluateDynamicString"
-import { getActionItemByDisplayName } from "@/redux/currentApp/action/actionSelector"
+// import { getActionItemByDisplayName } from "@/redux/currentApp/action/actionSelector"
 import { wrapperScriptCode } from "../evaluateDynamicString/valueConverter"
 import { clearLocalStorage, setValueLocalStorage } from "./utils/localStorage"
 import { hasDynamicStringSnippet } from "../helper"
 import { runOriginAction } from "../action/runAction"
+
+
+
+// called func(getActionList, getActionItemByDisplayName) directly insted of importing them
+export const getActionList = (state: RootState) => state.currentApp.action
+export const getActionItemByDisplayName = (
+  state: RootState,
+  displayName: string,
+) => {
+  const actionList = getActionList(state)
+  return actionList.find((item) => {
+    return item.displayName === displayName
+  })
+}
+
+
 
 export enum EVENT_ACTION_TYPE {
   OPEN_URL = "openUrl",
@@ -410,27 +426,27 @@ export const runEventHandler = (
   scriptObj: any,
   globalData: Record<string, any>,
 ) => {
-  const eventObj = transformEvents(scriptObj, globalData)
-  if (!eventObj) return
-  const { script, enabled } = eventObj
+  // const eventObj = transformEvents(scriptObj, globalData)
+  // if (!eventObj) return
+  // const { script, enabled } = eventObj
 
-  if (
-    (typeof enabled === "boolean" && enabled) ||
-    scriptObj.originEnable == undefined ||
-    scriptObj.originEnable === ""
-  ) {
-    if (typeof script === "string" && hasDynamicStringSnippet(script)) {
-      try {
-        evaluateDynamicString("events", script, globalData)
-      } catch (e) {
-        // message.error({
-        //   content: "eventHandler run error",
-        // })
-      }
-      return
-    }
-    if (typeof script === "function") {
-      script()
-    }
-  }
+  // if (
+  //   (typeof enabled === "boolean" && enabled) ||
+  //   scriptObj.originEnable == undefined ||
+  //   scriptObj.originEnable === ""
+  // ) {
+  //   if (typeof script === "string" && hasDynamicStringSnippet(script)) {
+  //     try {
+  //       evaluateDynamicString("events", script, globalData)
+  //     } catch (e) {
+  //       // message.error({
+  //       //   content: "eventHandler run error",
+  //       // })
+  //     }
+  //     return
+  //   }
+  //   if (typeof script === "function") {
+  //     script()
+  //   }
+  // }
 }

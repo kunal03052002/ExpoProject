@@ -2,9 +2,42 @@
 import { klona } from "klona/json"
 import { get, set, toPath } from "lodash-es"
 import { evaluateDynamicString } from "../evaluateDynamicString"
-import { runEventHandler } from "../eventHandlerHelper"
+// import { runEventHandler } from "../eventHandlerHelper"
 import { ILLAEditorRuntimePropsCollectorInstance } from "../executionTreeHelper/runtimePropsCollector"
 import { convertPathToString } from "../converter"
+
+
+import {transformEvents} from "../eventHandlerHelper/index"
+import { hasDynamicStringSnippet } from "../helper"
+export const runEventHandler = (
+  scriptObj: any,
+  globalData: Record<string, any>,
+) => {
+  const eventObj = transformEvents(scriptObj, globalData)
+  if (!eventObj) return
+  const { script, enabled } = eventObj
+
+  if (
+    (typeof enabled === "boolean" && enabled) ||
+    scriptObj.originEnable == undefined ||
+    scriptObj.originEnable === ""
+  ) {
+    if (typeof script === "string" && hasDynamicStringSnippet(script)) {
+      try {
+        evaluateDynamicString("events", script, globalData)
+      } catch (e) {
+        // message.error({
+        //   content: "eventHandler run error",
+        // })
+      }
+      return
+    }
+    if (typeof script === "function") {
+      script()
+    }
+  }
+}
+
 
 export const runAllEventHandler = (
   events: any[] = [],

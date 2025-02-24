@@ -3,7 +3,7 @@
 import {
   getIsIMPAKTProductMode,
 } from "@/redux/config/configSelector"
-// import { getActionList } from "@/redux/currentApp/action/actionSelector"
+// import { getActionList } from "@/redux/currentApp/action/actionSelector"     // used this func direcly in file
 import { Events } from "@/redux/currentApp/action/actionState"
 import { executionActions } from "@/redux/currentApp/executionTree/executionSlice"
 import store from "@/store"
@@ -14,15 +14,17 @@ import { runTransformer } from "./runActionTransformer"
 import { transResponse } from "./transResponse"
 import { ActionContent, ActionItem, ActionType } from "@/redux/currentApp/action/interface"
 import { RestAPIAction, RestAPIBodyContent } from "@/page/app/components/PublicTypes/action/restApi"
-import { ILLAApiError, isILLAAPiError } from "../../page/app/components/PublicTypes/ResourceGenerator"
-// page/app/components/PublicTypes/ResourceGenerator
-// import {isILLAAPiError}  from "./importisILLAAPiError"
-
+// import { ILLAApiError, isILLAAPiError } from "@/page/app/components/PublicTypes/ResourceGenerator"
+import { ILLAApiError, isILLAAPiError } from "@/page/app/components/PublicTypes/ResourceGenerator/utils" // import files from utils directly and not through index.ts
 
 import axios, { AxiosResponse } from "axios"
 import { buildAxiosConfig } from "@/page/app/components/Actions/axiosConfigBuilder"
 import { isElement, isEmpty } from "lodash"
 import {  setGlobalDataValue } from "../eventHandlerHelper/utils/globalDataUtils"
+
+
+
+
 
 const checkCanSendRequest = (
   _actionType: ActionType,
@@ -133,10 +135,7 @@ export interface IExecutionActions extends ActionItem<ActionContent> {
 }
 
 
-
-
-
- const getActionList = (state: any) => state.currentApp.action
+const getActionList = (state: any) => state.currentApp.action
 
 export const runActionWithExecutionResult = async (
   action: IExecutionActions,
@@ -238,10 +237,9 @@ export const runActionWithExecutionResult = async (
     )
 
     if (needRunEventHandler) {
-      // runAllEventHandler(originSuccessEvent, $dynamicAttrPaths)
+      runAllEventHandler(originSuccessEvent, $dynamicAttrPaths)
     }
     return Promise.resolve(userTransformedData)
-    return null
   } 
   
   
@@ -250,17 +248,7 @@ export const runActionWithExecutionResult = async (
       error: true,
       message: "An unknown error",
     }
-    // const isILLAAPiError = (
-    //   error: unknown,
-    // ): error is AxiosResponse<ILLAApiError> => {
-    //   return (
-    //     typeof error === "object" &&
-    //     error !== null &&
-    //     "data" in error 
-    //     // &&
-    //     // isIllaErrorInterface(error.data)
-    //   )
-    // }
+   
   
     if (isILLAAPiError(e)) {
       runResult.message = e.data?.errorMessage || "An unknown error"
@@ -289,9 +277,8 @@ export const runActionWithExecutionResult = async (
         },
       }),
     )
-    // if (needRunEventHandler)
+    if (needRunEventHandler)
       // runAllEventHandler(originFailedEvent, $dynamicAttrPaths)
-
     return Promise.reject(runResult)
   }
 

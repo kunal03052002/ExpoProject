@@ -112,13 +112,9 @@ export const TransformWidgetWrapper: FC<TransformWidgetProps> = memo(
       [displayName]
     );
 
-    // const deleteComponentRuntimeProps = useCallback(() => {
-    //   ILLAEditorRuntimePropsCollectorInstance.deleteRuntimeProp(displayName);
-    // }, [displayName]);
-
-
-
-
+    const deleteComponentRuntimeProps = useCallback(() => {
+      ILLAEditorRuntimePropsCollectorInstance.deleteRuntimeProp(displayName);
+    }, [displayName]);
 
     const {
       dynamicHeight = "fixed",
@@ -243,150 +239,150 @@ export const TransformWidgetWrapper: FC<TransformWidgetProps> = memo(
       [dispatch]
     );
 
-    // const getRunEvents = useCallback(
-    //   (
-    //     eventType: string,
-    //     path: string,
-    //     otherCalcContext?: Record<string, any>
-    //   ) => {
-    //     const originEvents = get(originComponentNode.props, path, []) as any[];
-    //     const dynamicPaths = get(
-    //       originComponentNode.props,
-    //       "$dynamicAttrPaths",
-    //       []
-    //     );
+    const getRunEvents = useCallback(
+      (
+        eventType: string,
+        path: string,
+        otherCalcContext?: Record<string, any>
+      ) => {
+        const originEvents = get(originComponentNode.props, path, []) as any[];
+        const dynamicPaths = get(
+          originComponentNode.props,
+          "$dynamicAttrPaths",
+          []
+        );
 
-    //     const needRunEvents = klona(originEvents)
-    //       .filter((originEvent) => {
-    //         return originEvent.eventType === eventType;
-    //       })
-    //       .map((originEvent) => {
-    //         return {
-    //           ...originEvent,
-    //           originEnable: originEvent.enabled,
-    //         };
-    //       });
-    //     const finalContext =
-    //       ILLAEditorRuntimePropsCollectorInstance.getCurrentPageCalcContext(
-    //         otherCalcContext
-    //       );
-    //     const actualNeedRunEvents = needRunEvents.map((e) => {
-    //       return { ...e, id: v4() };
-    //     });
-    //     return {
-    //       dynamicPaths,
-    //       needRunEvents: actualNeedRunEvents,
-    //       finalContext,
-    //     };
-    //   },
-    //   [originComponentNode?.props]
-    // );
-
-
+        const needRunEvents = klona(originEvents)
+          .filter((originEvent) => {
+            return originEvent.eventType === eventType;
+          })
+          .map((originEvent) => {
+            return {
+              ...originEvent,
+              originEnable: originEvent.enabled,
+            };
+          });
+        const finalContext =
+          ILLAEditorRuntimePropsCollectorInstance.getCurrentPageCalcContext(
+            otherCalcContext
+          );
+        const actualNeedRunEvents = needRunEvents.map((e) => {
+          return { ...e, id: v4() };
+        });
+        return {
+          dynamicPaths,
+          needRunEvents: actualNeedRunEvents,
+          finalContext,
+        };
+      },
+      [originComponentNode?.props]
+    );
 
 
 
-    // const triggerEventHandler = useCallback(
-    //   (
-    //     eventType: string,
-    //     path: string = "events",
-    //     otherCalcContext?: Record<string, any>,
-    //     formatPath?: (path: string) => string
-    //   ) => {
-    //     const { dynamicPaths, needRunEvents, finalContext } = getRunEvents(
-    //       eventType,
-    //       path,
-    //       otherCalcContext
-    //     );
 
-    //     dynamicPaths?.forEach((path: string) => {
-    //       const realPath = isFunction(formatPath)
-    //         ? formatPath(path)
-    //         : convertPathToString(toPath(path).slice(1));
-    //       try {
-    //         const dynamicString = get(needRunEvents, realPath, "");
-    //         if (dynamicString) {
-    //           const calcValue = evaluateDynamicString(
-    //             `events${realPath}`,
-    //             dynamicString,
-    //             finalContext
-    //           );
-    //           if (listContainerDisplayName) {
-    //             set(
-    //               needRunEvents,
-    //               realPath,
-    //               Array.isArray(calcValue) ? calcValue[0] : calcValue
-    //             );
-    //           } else {
-    //             set(needRunEvents, realPath, calcValue);
-    //           }
-    //         }
-    //       } catch (_ignore) {
-    //         console.log("error");
-    //       }
-    //     });
 
-    //     needRunEvents.forEach((scriptObj: any) => {
-    //       runEventHandler(scriptObj, finalContext);
-    //     });
-    //   },
-    //   [getRunEvents, listContainerDisplayName]
-    // );
+    const triggerEventHandler = useCallback(
+      (
+        eventType: string,
+        path: string = "events",
+        otherCalcContext?: Record<string, any>,
+        formatPath?: (path: string) => string
+      ) => {
+        const { dynamicPaths, needRunEvents, finalContext } = getRunEvents(
+          eventType,
+          path,
+          otherCalcContext
+        );
 
-    // const triggerMappedEventHandler = useCallback(
-    //   (
-    //     eventType: string,
-    //     path: string = "events",
-    //     index?: number,
-    //     formatPath?: (path: string) => string,
-    //     isMapped?: (dynamicString: string, calcValue: unknown) => boolean
-    //   ) => {
-    //     const { dynamicPaths, needRunEvents, finalContext } = getRunEvents(
-    //       eventType,
-    //       path
-    //     );
-    //     dynamicPaths?.forEach((path: string) => {
-    //       const realPath = isFunction(formatPath)
-    //         ? formatPath(path)
-    //         : convertPathToString(toPath(path).slice(2));
+        dynamicPaths?.forEach((path: string) => {
+          const realPath = isFunction(formatPath)
+            ? formatPath(path)
+            : convertPathToString(toPath(path).slice(1));
+          try {
+            const dynamicString = get(needRunEvents, realPath, "");
+            if (dynamicString) {
+              const calcValue = evaluateDynamicString(
+                `events${realPath}`,
+                dynamicString,
+                finalContext
+              );
+              if (listContainerDisplayName) {
+                set(
+                  needRunEvents,
+                  realPath,
+                  Array.isArray(calcValue) ? calcValue[0] : calcValue
+                );
+              } else {
+                set(needRunEvents, realPath, calcValue);
+              }
+            }
+          } catch (_ignore) {
+            console.log("error");
+          }
+        });
 
-    //       try {
-    //         const dynamicString = get(needRunEvents, realPath, "");
+        needRunEvents.forEach((scriptObj: any) => {
+          runEventHandler(scriptObj, finalContext);
+        });
+      },
+      [getRunEvents, listContainerDisplayName]
+    );
 
-    //         if (dynamicString) {
-    //           const calcValue = evaluateDynamicString(
-    //             `events${realPath}`,
-    //             dynamicString,
-    //             finalContext
-    //           );
-    //           let valueToSet = calcValue;
+    const triggerMappedEventHandler = useCallback(
+      (
+        eventType: string,
+        path: string = "events",
+        index?: number,
+        formatPath?: (path: string) => string,
+        isMapped?: (dynamicString: string, calcValue: unknown) => boolean
+      ) => {
+        const { dynamicPaths, needRunEvents, finalContext } = getRunEvents(
+          eventType,
+          path
+        );
+        dynamicPaths?.forEach((path: string) => {
+          const realPath = isFunction(formatPath)
+            ? formatPath(path)
+            : convertPathToString(toPath(path).slice(2));
 
-    //           if (listContainerDisplayName) {
-    //             valueToSet = Array.isArray(calcValue)
-    //               ? calcValue[0]
-    //               : calcValue;
-    //           }
+          try {
+            const dynamicString = get(needRunEvents, realPath, "");
 
-    //           if (Array.isArray(calcValue) && isNumber(index)) {
-    //             if (
-    //               !isFunction(isMapped) ||
-    //               isMapped(dynamicString, calcValue)
-    //             ) {
-    //               valueToSet = calcValue[index];
-    //             }
-    //           }
-    //           set(needRunEvents, realPath, valueToSet);
-    //         }
-    //       } catch (e) {
-    //         console.log(e);
-    //       }
-    //     });
-    //     needRunEvents.forEach((scriptObj: any) => {
-    //       runEventHandler(scriptObj, finalContext);
-    //     });
-    //   },
-    //   [getRunEvents, listContainerDisplayName]
-    // );
+            if (dynamicString) {
+              const calcValue = evaluateDynamicString(
+                `events${realPath}`,
+                dynamicString,
+                finalContext
+              );
+              let valueToSet = calcValue;
+
+              if (listContainerDisplayName) {
+                valueToSet = Array.isArray(calcValue)
+                  ? calcValue[0]
+                  : calcValue;
+              }
+
+              if (Array.isArray(calcValue) && isNumber(index)) {
+                if (
+                  !isFunction(isMapped) ||
+                  isMapped(dynamicString, calcValue)
+                ) {
+                  valueToSet = calcValue[index];
+                }
+              }
+              set(needRunEvents, realPath, valueToSet);
+            }
+          } catch (e) {
+            console.log(e);
+          }
+        });
+        needRunEvents.forEach((scriptObj: any) => {
+          runEventHandler(scriptObj, finalContext);
+        });
+      },
+      [getRunEvents, listContainerDisplayName]
+    );
 
 
     // if (displayName.startsWith("button")) {
@@ -403,37 +399,37 @@ export const TransformWidgetWrapper: FC<TransformWidgetProps> = memo(
       borderWidth,
       shadow,
     } = realProps;
-    // const _radius = !isNaN(Number(radius)) ? radius + "px" : radius?.toString();
-    // const _borderWidth = !isNaN(Number(borderWidth))
-    //   ? borderWidth + "px"
-    //   : borderWidth?.toString();
+    const _radius = !isNaN(Number(radius)) ? radius + "px" : radius?.toString();
+    const _borderWidth = !isNaN(Number(borderWidth))
+      ? borderWidth + "px"
+      : borderWidth?.toString();
     return (
       <>
         {hidden ? null : (
-          // <div
-          //   css={applyWrapperStylesStyle(
-          //     borderColor,
-          //     _borderWidth,
-          //     _radius,
-          //     backgroundColor,
-          //     shadow,
-          //     widgetType
-          //   )}
-          //   id={displayName}
-          // >
+          <div
+            css={applyWrapperStylesStyle(
+              borderColor,
+              _borderWidth,
+              _radius,
+              backgroundColor,
+              shadow,
+              widgetType
+            )}
+            id={displayName}
+          >
             <Suspense
               fallback={
-                // <div
-                //   id={displayName}
-                //   style={{
-                //     display: "flex",
-                //     alignItems: "center",
-                //     justifyContent: "center",
-                //   }}
-                // >
-                  // <CommonSkeleton />
-                  <></>
-                // </div>
+                <div
+                  id={displayName}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <CommonSkeleton />
+                
+                </div>
               }
             >
               <Component
@@ -458,10 +454,10 @@ export const TransformWidgetWrapper: FC<TransformWidgetProps> = memo(
                 childrenNode={originComponentNode.childrenNode}
                 componentNode={originComponentNode}
                 disabled={listContainerDisabled}
-                // triggerEventHandler={triggerEventHandler}
-                // triggerMappedEventHandler={triggerMappedEventHandler}
-                // updateComponentRuntimeProps={updateComponentRuntimeProps}
-                // deleteComponentRuntimeProps={deleteComponentRuntimeProps}
+                triggerEventHandler={triggerEventHandler}
+                triggerMappedEventHandler={triggerMappedEventHandler}
+                updateComponentRuntimeProps={updateComponentRuntimeProps}
+                deleteComponentRuntimeProps={deleteComponentRuntimeProps}
               />
             </Suspense>
           // </div>

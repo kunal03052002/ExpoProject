@@ -18,7 +18,7 @@ import {
   navbarStyle,
 } from "./style";
 import { PageNavBar } from "./module/PageNavBar";
-// import { CanvasPanel } from "./module/CanvasPanel";
+import { CanvasPanel } from "./module/CanvasPanel";
 // import { useResize } from "./components/scaleSquare/components/ResizingAndDragContainer/ResizeHandler/hooks";
 // import { Unsubscribe } from "redux";
 // import { setupExecutionListeners } from "@/redux/currentApp/executionTree/executionListener";
@@ -27,7 +27,7 @@ import { PageNavBar } from "./module/PageNavBar";
 // import { setupComponentsListeners } from "@/redux/currentApp/components/componentsListener";
 // import { setupConfigListeners } from "@/redux/config/configListener";
 // import ComponentsManager from "./module/ComponentManager";
-// import { TriggerProvider } from "@/utils/trigger/trigger-provider";
+import { TriggerProvider } from "@/utils/trigger/trigger-provider";
 // import LeftPanel from "./module/LeftPanel";
 // import { Shortcut } from "@/utils/shortcut";
 // import { ActionEditor } from "./module/ActionEditor";
@@ -71,20 +71,20 @@ export const Editor: FC = (props:any) => {
         {/* <div css={editorContainerStyle} ref={resizeDropRef}> */}
           <PageNavBar css={navbarStyle} />
           <div css={contentStyle}>
-            {/* {showLeftPanel ? <LeftPanel /> : null}
+            {/* {showLeftPanel ? <LeftPanel /> : null} */}
             <div css={middlePanelStyle}>
               <TriggerProvider renderInBody zIndex={10}>
                 <CanvasPanel css={centerPanelStyle} />
               </TriggerProvider>
-              <TriggerProvider renderInBody zIndex={10}>
+              {/* <TriggerProvider renderInBody zIndex={10}>
                 {showBottomPanel && !showDebugger && !showStyle ? (
                   <ActionEditor />
                 ) : null}
                 {showBottomPanel && showStyle ? <StyleEditor /> : null}
-              </TriggerProvider>
+              </TriggerProvider> */}
             </div>
 
-            {showRightPanel && (
+            {/* {showRightPanel && (
               <TriggerProvider renderInBody zIndex={10}>
                 <ComponentsManager />
               </TriggerProvider>

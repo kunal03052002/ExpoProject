@@ -1,18 +1,19 @@
 // import { MutableRefObject, useRef } from "react";
-// import { DndProvider } from "react-dnd";
+import { DndProvider } from "react-dnd";
 import Editor from "../../page/app";
-// import { ConfigProvider, enUS } from "./utils/configProvider";
+import { ConfigProvider, enUS } from "../../utils/configProvider";
 // import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 // import { globalStyle } from "./style";
 import { Global } from "@emotion/react";
-// import { ModalGroup } from "./utils/model/src/modal-group";
+import { ModalGroup } from "../../utils/model/src/modal-group";
 // import { TouchBackend } from "react-dnd-touch-backend";
-// import { NotificationGroup } from "./utils/Notification";
+import { NotificationGroup } from "../../utils/Notification";
 // import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Provider } from "react-redux";
 import store from "@/store";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function App(props:any) {
@@ -34,18 +35,21 @@ function App(props:any) {
 //   }, [currentUserLanguage, i18n, id]);
   return ( 
     <>
+    <DndProvider backend={HTML5Backend}>
     <Provider store={store}>
       <div style={{ boxSizing: "border-box", overflow: "hidden" }}>
         {/* <DndProvider backend={TouchBackend} options={dragOptions}> */}
-          {/* <ConfigProvider locale={enUS}> */}
+          <ConfigProvider locale={enUS}>
             {/* <Global styles={globalStyle} /> */}
             {/* <NotificationGroup pt={"46px"} /> */}
             {/* <ModalGroup /> */}
             <Editor {...props}/>
-          {/* </ConfigProvider> */}
+          </ConfigProvider>
         {/* </DndProvider> */}
       </div>
       </Provider>
+      </DndProvider>
+      
     </>
   );
 }

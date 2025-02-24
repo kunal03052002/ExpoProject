@@ -1,24 +1,21 @@
 import { ListenerEffectAPI, TypedStartListening, configureStore, createListenerMiddleware } from "@reduxjs/toolkit"
-// import { appReducer } from "./redux/currentApp/slice"
+import { appReducer } from "./redux/currentApp/slice"
 import configReducer from "@/redux/config/configSlice"
-// import resourceReducer from "@/redux/resource/resourceSlice"
+import resourceReducer from "@/redux/resource/resourceSlice"
 const listenerMiddleware = createListenerMiddleware()
 console.log(
   "Reducers >>",
   {
-    config: configReducer,
-    // currentApp: appReducer,
+    // config: configReducer,
+    currentApp: appReducer,
     // resource: resourceReducer,
-
-
-
   }
 )
 const store = configureStore({
   reducer: {
     config: configReducer,
-    // currentApp: appReducer,
-    // resource: resourceReducer,
+    currentApp: appReducer,
+    resource: resourceReducer,
 
 
 

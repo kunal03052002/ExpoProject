@@ -6,7 +6,7 @@ export default function WebLayout() {
   const router = useRouter();
   useEffect(() => {
     if (window.location.pathname === "/") {
-      router.replace("/App");
+      router.replace("/(web)/App");
     }  
   }, []);
   return <Slot />;

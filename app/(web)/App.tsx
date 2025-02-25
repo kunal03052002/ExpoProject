@@ -4,9 +4,7 @@ function App(props: any) {
   return (
     <>
       <Provider store={store}>
-        <div style={{ boxSizing: "border-box", overflow: "hidden" }}>
-          <div>Hello World</div>
-        </div>
+        <div>Hello World</div>
       </Provider>
     </>
   );

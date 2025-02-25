@@ -15,7 +15,7 @@ import { transResponse } from "./transResponse"
 import { ActionContent, ActionItem, ActionType } from "@/redux/currentApp/action/interface"
 import { RestAPIAction, RestAPIBodyContent } from "@/page/app/components/PublicTypes/action/restApi"
 // import { ILLAApiError, isILLAAPiError } from "@/page/app/components/PublicTypes/ResourceGenerator"
-import { ILLAApiError, isILLAAPiError } from "@/page/app/components/PublicTypes/ResourceGenerator/utils" // import files from utils directly and not through index.ts
+import { ILLAApiError, isILLAAPiError } from "@/page/app/components/PublicTypes/ResourceGenerator" // import files from utils directly and not through index.ts
 
 import axios, { AxiosResponse } from "axios"
 import { buildAxiosConfig } from "@/page/app/components/Actions/axiosConfigBuilder"

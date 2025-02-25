@@ -43,7 +43,7 @@ function App(props:any) {
             {/* <Global styles={globalStyle} /> */}
             {/* <NotificationGroup pt={"46px"} /> */}
             {/* <ModalGroup /> */}
-            <Editor {...props}/>
+            {/* <Editor {...props}/> */}
           </ConfigProvider>
         {/* </DndProvider> */}
       </div>

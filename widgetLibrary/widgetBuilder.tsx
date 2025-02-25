@@ -2,17 +2,17 @@
 import { WidgetConfigs } from "./interface";
 // import { BUTTON_EVENT_HANDLER_CONFIG, ButtonWidget } from "./ButtonWidget";
 // import { BUTTON_WIDGET_CONFIG } from "./ButtonWidget";
-// import {
+import {
 
-//   CONTAINER_PANEL_CONFIG,
-//   CONTAINER_WIDGET_CONFIG,
-//   ContainerWidget,
-//   // CONTAINER_WIDGET_CONFIG2
-// } from "./ContainerWidget";
+  CONTAINER_PANEL_CONFIG,
+  CONTAINER_WIDGET_CONFIG,
+  ContainerWidget,
+  // CONTAINER_WIDGET_CONFIG2
+} from "./ContainerWidget";
 
-import { CONTAINER_WIDGET_CONFIG } from "./ContainerWidget/widgetConfig"
-import { CONTAINER_PANEL_CONFIG } from "./ContainerWidget/panelConfig"
-import {ContainerWidget} from './ContainerWidget/container'
+// import { CONTAINER_WIDGET_CONFIG } from "./ContainerWidget/widgetConfig"
+// import { CONTAINER_PANEL_CONFIG } from "./ContainerWidget/panelConfig"
+// import {ContainerWidget} from './ContainerWidget/container'
 
 
 import { lazy } from "react";
@@ -148,9 +148,9 @@ export const WidgetConfig: WidgetConfigs = {
   // //container
   CONTAINER_WIDGET: {
     config: CONTAINER_WIDGET_CONFIG ,
-    panelConfig: CONTAINER_PANEL_CONFIG,
-    eventHandlerConfig: CONTAINER_EVENT_HANDLER_CONFIG,
-    widget: ContainerWidget,
+    // panelConfig: CONTAINER_PANEL_CONFIG,
+    // eventHandlerConfig: CONTAINER_EVENT_HANDLER_CONFIG,
+    // widget: ContainerWidget,
   },
   // GridCONTAINER_WIDGET: {
   //   config: CSSGrid_WIDGET_CONFIG,

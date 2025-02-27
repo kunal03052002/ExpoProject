@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { WidgetConfigs } from "./interface";
 
-import {
+import {                                               // this import will throw error
   CONTAINER_WIDGET_CONFIG,
-} from "./ContainerWidget/widgetConfig";
+} from "./ContainerWidget/index";
 
 // import {                                            // Use this import instead to make the code work
 //    CONTAINER_WIDGET_CONFIG 
